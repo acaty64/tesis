@@ -1,0 +1,4 @@
+crontab.info
+
+1) Ir a path ~
+2) Agregar * * * * * cd ~/code/syllabus5 && php artisan schedule:run >> /dev/null 2>&1
