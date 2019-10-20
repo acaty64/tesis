@@ -43,19 +43,19 @@ class Kernel extends HttpKernel
         ],
 
         'sys' => [
-            'master'
+            'master',
         ],
 
-        'adm' => [
+        'manager' => [
             'admin'
         ],
 
-        'resp' => [
-            'responsable'
+        'author' => [
+            'autor'
         ],
 
-        'doc' => [
-            'docente'
+        'advisor' => [
+            'asesor'
         ],
 
     ];
@@ -76,7 +76,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'master' => \App\Http\Middleware\MasterMiddleware::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
-        'responsable' => \App\Http\Middleware\RespMiddleware::class,
-        'docente' => \App\Http\Middleware\DocMiddleware::class,
+        'autor' => \App\Http\Middleware\AutorMiddleware::class,
+        'asesor' => \App\Http\Middleware\AsesorMiddleware::class,
     ];
 }

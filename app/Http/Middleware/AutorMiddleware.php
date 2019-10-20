@@ -7,7 +7,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
 
 
-class AdminMiddleware
+class AutorMiddleware
 {
     public function __construct(Guard $auth)
     {
@@ -26,8 +26,7 @@ class AdminMiddleware
             Auth::logout();
             return redirect()->to('login');
         }; 
-        // if($this->auth->user()->tuser == 'Administrador'){
-        if($this->auth->user()->tuser == 'Administrador' || 
+        if($this->auth->user()->tuser == 'Autor' || 
             $this->auth->user()->tuser == 'Master'){
             return $next($request);
         }else{

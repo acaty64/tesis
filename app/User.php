@@ -12,12 +12,18 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
-    protected $appends = ['acceso', 'grupo', 'tuser'];
+    protected $appends = ['tuser', 'tuser_user'];
 
     public function getTuserAttribute()
     {
         $val = $this->belongsTo(Tuser_user::class, 'id', 'user_id')->first();
         return $val->tuser->name;
+    }
+
+    public function getTuserUserAttribute()
+    {
+        $val = $this->belongsTo(Tuser_user::class, 'id', 'user_id')->first();
+        return $val;
     }
 
 

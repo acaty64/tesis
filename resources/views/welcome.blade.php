@@ -9,9 +9,9 @@
                 Facultad de Ciencias Económicas y Comerciales
             </h1>
             <h1>
-                SYLLABUS
+                TESIS
             </h1>
-            <h1>{{ env('SEMESTRE') }}</h1>
+            {{-- <h1>{{ env('SEMESTRE') }}</h1> --}}
         </div>
     </div>
 @endsection

@@ -3,12 +3,10 @@
 namespace Tests\Unit;
 
 use App\Acceso;
-use App\Contenido;
-use App\Grupo;
-use App\Sumilla;
+use App\Tuser;
+use App\Tuser_user;
 use App\User;
 use App\UserAcceso;
-use App\UserGrupo;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -20,15 +18,14 @@ class A00_AccesoTest extends TestCase
 {
 	use DatabaseMigrations;
 
-//		$this->seed('DatabaseSeeder');
 
-/*
-	public function setUp(): void
-	{
-		parent::setUp();
-		$this->artisan('db:seed');
-	}
-*/
+
+	// public function setUp(): void
+	// {
+	// 	parent::setUp();
+	// 	$this->artisan('db:seed');
+	// }
+
 
     /**
      * @test
@@ -45,11 +42,9 @@ class A00_AccesoTest extends TestCase
      */
     public function it_displays_404s_when_auths_visit_invalid_url()
     {
-        $user = $this->defaultUser();
-        $userAcceso = $this->defaultUserAcceso([
-                    'cod_acceso'=>'doc',
-                    'user_id' => $user->id
-                ]);
+    	// $this->seed('DatabaseSeeder');
+        $this->defaultUsers();
+        $user = User::findOrFail(1);
         $this->actingAs($user);
 
         $response = $this->get('invalid-url');
@@ -63,24 +58,16 @@ class A00_AccesoTest extends TestCase
      */
     public function check_masterTest()
     {
-/*
-        $acceso_id = Acceso::where('cod_acceso', 'master')->first()->id;
-        $user_id = UserAcceso::where('acceso_id', $acceso_id)->first()->user_id;
-        //->$user_id;
-        $user = User::find($user_id);
+        $this->defaultUsers();
+        // $this->seed('DatabaseSeeder');
+        $type_id = Tuser::where('name', 'Master')->first()->id;
+        $user_id = Tuser_user::where('tuser_id', $type_id)->first()->user_id;
+        $user = User::findOrFail($user_id);
         $this->actingAs($user);
-*/
-        $user = $this->defaultUser();
-        $userAcceso = $this->defaultUserAcceso([
-                    'cod_acceso'=>'master',
-                    'user_id' => $user->id
-                ]);
-        $this->actingAs($user);
-
-        $response = $this->get('sys/backup');
+// dd($user->tuser_user, $user->tuser, $type_id, $user_id);
+        $response = $this->get(route('sys.tests'));
         $response->assertStatus(200);
-        $response->assertViewIs('backup.index');
-//      $this->markTestIncomplete();        
+        $response->assertViewIs('tests');
     }
 
     /**
@@ -90,52 +77,44 @@ class A00_AccesoTest extends TestCase
      */
     public function administradorTest()
     {
-        $user = $this->defaultUser();
-        $userAcceso = $this->defaultUserAcceso([
-                    'cod_acceso'=>'adm',
-                    'user_id' => $user->id
-                ]);
+		// $this->markTestIncomplete();
+        $this->defaultUsers();
+        $type_id = Tuser::where('name', 'Administrador')->first()->id;
+        $user_id = Tuser_user::where('tuser_id', $type_id)->first()->user_id;
+        $user = User::findOrFail($user_id);
         $this->actingAs($user);
-        $response = $this->get('adm/grupos/show');
-    	$response->assertStatus(200);
-    	$response->assertViewIs('app.grupos');
-//		$this->markTestIncomplete();
-        // An administrador don't access backup.index
-        $response = $this->get('sys/backup');
+
+        $response = $this->get('admin/tests');
+        $response->assertStatus(200);
+        $response->assertViewIs('tests');
+        // An administrador don't access sys/tests
+        $response = $this->get('sys/tests');
         $response->assertStatus(302);            	
     }
 
     /**
-     * A 'responsable' access test example.
+     * A 'autor' access test example.
      *
      * @test
      */
-    public function responsableTest()
+    public function autorTest()
     {
-        $user = $this->defaultUser();
-        $userAcceso = $this->defaultUserAcceso([
-                    'cod_acceso'=>'resp',
-                    'user_id' => $user->id
-                ]);
-        $grupo = Grupo::create([
-                'cod_grupo' => 'ADM',
-                'wgrupo' => 'ADMINISTRACION'
-            ]);
-        UserGrupo::create([
-                'semestre' => env('SEMESTRE'),
-                'user_id' => $user->id,
-                'grupo_id' => $grupo->id
-            ]);
-
+        // $this->markTestIncomplete();
+        // $this->seed('DatabaseSeeder');
+        $this->defaultUsers();
+        $type_id = Tuser::where('name', 'Autor')->first()->id;
+        $user_id = Tuser_user::where('tuser_id', $type_id)->first()->user_id;
+        $user = User::findOrFail($user_id);
         $this->actingAs($user);
-        $response = $this->get('resp/cursogrupo/ADM');
-        $response->assertStatus(200);
-        $response->assertViewIs('app.cursoGrupo');
-        // A responsable don't access adm/grupos
-        $response = $this->get('adm/grupos/show');
-        $response->assertStatus(302);      
 
-        //$this->markTestIncomplete();
+        $response = $this->get('autor/tests');
+        $response->assertStatus(200);
+        $response->assertViewIs('tests');
+
+        // An autor don't access sys/tests
+        $response = $this->get('sys/tests');
+        $response->assertStatus(302);               
+
     }
 
     /**
@@ -143,22 +122,22 @@ class A00_AccesoTest extends TestCase
      *
      * @test
      */
-    public function docenteTest()
+    public function asesorTest()
     {
-        $this->artisan('db:seed');
-        $user = $this->defaultUser();
-        $userAcceso = $this->defaultUserAcceso([
-                    'cod_acceso'=>'doc',
-                    'user_id' => $user->id
-                ]);
+        $user = $this->defaultUsers();
+        $type_id = Tuser::where('name', 'Asesor')->first()->id;
+        $user_id = Tuser_user::where('tuser_id', $type_id)->first()->user_id;
+        $user = User::findOrFail($user_id);
         $this->actingAs($user);
-        $response = $this->get('doc/edit/'.env("SEMESTRE").'/100048');
+
+        $response = $this->get('asesor/tests');
         $response->assertStatus(200);
-        $response->assertViewIs('app.show');
-        // A responsable don't access resp/cursogrupo/ADM
-        $response = $this->get('resp/cursogrupo/ADM');
-        $response->assertStatus(302);    
-        //$this->markTestIncomplete();        
+        $response->assertViewIs('tests');
+
+        // An advisor don't access sys/tests
+        $response = $this->get('sys/tests');
+        $response->assertStatus(302);               
+
     }
      
 

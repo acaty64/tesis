@@ -2,48 +2,46 @@
 
 namespace Tests;
 
-use App\Acceso;
+use App\Tuser_user;
 use App\User;
 use App\UserAcceso;
-//use Illuminate\Support\Facades\Session;
-
-//use Illuminate\Contracts\Console\Kernel;
+use App\Tuser;
 
 trait TestsHelper
 {
     protected $defaultUser;
     protected $defaultUserAcceso;
-//    protected $authUser;
 
     public function defaultUser(array $attributes = [])
     {
         return $this->defaultUser = factory(User::class)->create($attributes);
     }
 
-    public function defaultUserAcceso(array $attributes = [])
+    public function defaultUsers()
     {
-//dd('defaultUserAcceso', $attributes);
-        Acceso::create([
-                'cod_acceso' => 'master',
-                'wacceso' => 'Master',
+        factory(User::class,4)->create();   
+        Tuser::create([
+            'name'=>'Master'
+        ]);
+        Tuser::create([
+            'name'=>'Administrador'
+        ]);
+        Tuser::create([
+            'name'=>'Autor'
+        ]);
+        Tuser::create([
+            'name'=>'Asesor'
+        ]);
+        $n = 1; 
+        for ($i=4; $i > 0; $i--) {
+            Tuser_user::create([
+                'user_id' => $n++,
+                'tuser_id' => $i,
             ]);
-        Acceso::create([
-                'cod_acceso' => 'adm',
-                'wacceso' => 'Administrador',
-            ]);
-        Acceso::create([
-                'cod_acceso' => 'resp',
-                'wacceso' => 'Responsable',
-            ]);
-        Acceso::create([
-                'cod_acceso' => 'doc',
-                'wacceso' => 'Docente',
-            ]);
-        $acceso_id = Acceso::where('cod_acceso', $attributes['cod_acceso'])->first()->id;
-        $UserAccesoAttributes = [
-                    'user_id' => $attributes['user_id'],
-                    'acceso_id' => $acceso_id
-                ];
-        return $this->defaultUserAcceso = UserAcceso::create($UserAccesoAttributes);
+        }
+        // $users = User::all();
+        // return $users;
     }
+
+
 }

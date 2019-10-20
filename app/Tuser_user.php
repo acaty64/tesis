@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Tuser;
 use Illuminate\Database\Eloquent\Model;
 
 class Tuser_user extends Model
@@ -12,14 +13,28 @@ class Tuser_user extends Model
     ];	
     protected $table = 'tuser_user';
 
-    public function user()
+    protected $appends = ['tuser', 'user'];
+
+
+    public function getTuserAttribute()
     {
-    	return $this->belongsTo(User::class, 'id');
+        $val = $this->belongsTo(Tuser::class, 'tuser_id', 'id')->first();
+        return $val;
     }
 
-    public function tuser()
+    public function getUserAttribute()
     {
-    	return $this->belongsTo(Tuser::class, 'id');
+        $val = $this->belongsTo(User::class, 'user_id', 'id')->first();
+        return $val;
     }
+    // public function user()
+    // {
+    // 	return $this->belongsTo(User::class, 'id');
+    // }
+
+    // public function tuser()
+    // {
+    // 	return $this->belongsTo(Tuser::class, 'id');
+    // }
 
 }

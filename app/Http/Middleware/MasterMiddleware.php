@@ -26,8 +26,7 @@ class MasterMiddleware
             Auth::logout();
             return redirect()->to('login');
         };
-
-        if($this->auth->user()->acceso->cod_acceso != 'master'){
+        if($this->auth->user()->tuser != 'Master'){
             return redirect()->to('home');
         }        
         return $next($request);
