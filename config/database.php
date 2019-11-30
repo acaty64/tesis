@@ -56,6 +56,29 @@ return [
             ]  
         ],
 
+        // 'login' => [
+        //     'driver' => 'mysql',
+        //     'host' => env('DB_HOST', '127.0.0.1'),
+        //     'port' => env('DB_PORT', '3306'),
+        //     'database' => env('LOGIN_DATABASE', 'forge'),
+        //     'username' => env('LOGIN_USERNAME', 'forge'),
+        //     'password' => env('LOGIN_PASSWORD', ''),
+        //     'unix_socket' => env('DB_SOCKET', ''),
+        //     'charset' => 'utf8mb4',
+        //     'collation' => 'utf8mb4_unicode_ci',
+        //     'prefix' => '',
+        //     'strict' => true,
+        //     'engine' => null,
+        //     'dump' => [ // Opciones de backup mysql
+        //        //'dump_binary_path' => '/path/to/the/binary', // only the path, so without `mysqldump` or `pg_dump`
+        //        'dump_binary_path' => '/usr/bin/', 
+        //        'use_single_transaction',
+        //        'timeout' => 60 * 5, // 5 minute timeout
+        //        //'exclude_tables' => ['table1', 'table2'],
+        //        //'add_extra_option' => '--optionname=optionvalue', 
+        //     ]  
+        // ],
+
         'mysql_tests' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),

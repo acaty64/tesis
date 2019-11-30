@@ -19,8 +19,9 @@ class CreateEmailsTable extends Migration
             $table->datetime('date');
             $table->integer('from_user_id');
             $table->integer('to_user1_id');
-            $table->integer('to_user2_id');
-            $table->integer('to_user3_id');
+            $table->integer('to_user2_id')->nullable();
+            $table->integer('to_user3_id')->nullable();
+            $table->integer('temail_id')->nullable();
             $table->timestamps();
         });
     }

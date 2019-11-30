@@ -14,7 +14,7 @@ class AuthorsTableSeeder extends Seeder
     public function run()
     {
     	$authors = Tuser_user::where('tuser_id', 3)->get();
-    	$thesis_id = 0;
+    	$thesis_id = 1;
     	foreach ($authors as $item) {
 	        Author::create([
 	        	'thesis_id' => $thesis_id++,

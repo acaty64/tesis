@@ -11,7 +11,52 @@ Route::get('prueba', [
 	'uses'	=> 'Sys\ArchivoController@index'
 ]);
 
+Route::get('sequence/show/{id}/{thesis_id?}', [
+	'as'	=> 'sequence.show',
+	'uses'	=> 'SequenceController@show'
+]);
 
+// THESIS
+Route::get('thesis/email/{deal_id}', [
+	'as'	=> 'thesis.email',
+	'uses'	=> 'ThesisController@email'
+]);
+
+Route::get('thesis/index', [
+	'as'	=> 'thesis.index',
+	'uses'	=> 'ThesisController@index'
+]);
+
+Route::get('thesis/create', [
+	'as'	=> 'thesis.create',
+	'uses'	=> 'ThesisController@create'
+]);
+
+Route::post('thesis/store', [
+	'as'	=> 'thesis.store',
+	'uses'	=> 'ThesisController@store'
+]);
+
+Route::get('thesis/edit/{id}', [
+	'as'	=> 'thesis.edit',
+	'uses'	=> 'ThesisController@edit'
+]);
+
+Route::post('thesis/upload', [
+	'as'	=> 'thesis.upload',
+	'uses'	=> 'ThesisController@upload'
+]);
+
+Route::get('thesis/destroy/{id}', [
+	'as'	=> 'thesis.destroy',
+	'uses'	=> 'ThesisController@destroy'
+]);
+
+/* USERS */
+Route::get('users/index', [
+	'as'	=> 'user.index',
+	'uses'	=> 'UserController@index'
+]);
 
 /* Ruta auth()  */
 Route::get('login', [
@@ -54,74 +99,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', function () {
 	return view('welcome');
 });
-
-/* Acceso Consulta, Docente, Responsable, Administrador, Master 
-Route::get('/user/redirect', [
-	'as'	=> 'user.redirect',
-	'uses'	=> 'UserAccesoController@redirect'
-]);
- */
-
-/* Acceso Consulta, Docente, Responsable, Administrador, Master  */
-Route::get('/malla/{siglas}', [
-	'as'	=> 'malla',
-	'uses'	=> 'MallaController@index'
-]);
-
-/* Acceso Consulta, Docente, Responsable, Administrador, Master  */
-Route::get('PDF/malla/{siglas}', [
-	'as'	=> 'PDF.malla',
-	'uses'	=> 'PDFController@malla'
-]);
-
-
-/* Acceso Consulta, Docente, Responsable, Administrador, Master   */
-Route::get('/show/{semestre}/{cod_curso}', [
-	'as'	=> 'curso.show',
-	'uses'	=> 'CursoController@show'
-]);
-
-/* Acceso Consulta, Docente, Responsable, Administrador, Master  
-Route::get('/show/{semestre}/{cod_curso}/{edit}', [
-	'as'	=> 'curso.show',
-	'uses'	=> 'CursoController@show'
-]);
-*/
-
-/* Acceso Responsable, Administrador, Master  */
-Route::get('/syllabus/show', [
-	'as'	=> 'syllabus.show',
-	'uses'	=> 'SyllabusController@show'
-]);
-
-/* Acceso Consulta, Docente, Responsable, Administrador, Master  */
-Route::get('/cursos/index', [
-	'as'	=> 'cursos.index',
-	'uses'	=> 'CursoController@index'
-]);
-
-/* Acceso Consulta, Docente, Responsable, Administrador, Master  */
-Route::get('/PDF/syllabus/{semestre}/{cod_curso}/{view}/{message}', [
-	'as'	=> 'PDF',
-	'uses'	=> 'PDFController@ViewSyllabus'
-]);
-
-/* Acceso Consulta, Docente, Responsable, Administrador, Master  */
-Route::get('/header/PDF/syllabus/{semestre}', function ($semestre) {
-    return view('layouts.partials.header_PDF', ['semestre'=>$semestre]);
-});
-
-/* Acceso Consulta, Docente, Responsable, Administrador, Master  */
-Route::get('/footer/PDF/syllabus/{semestre}', function ($semestre) {
-    return view('layouts.partials.footer_PDF', ['semestre'=>$semestre]);
-});
-
-
-/* Acceso Consulta, Docente, Responsable, Administrador, Master  */
-Route::get('/downloadFile/{fileName}/{type}', [
-	'as'	=> 'download.file',
-	'uses'	=> 'Api\DownloadController@downloadFile'
-]);
 
 
 /*  Pagina en construccion       */

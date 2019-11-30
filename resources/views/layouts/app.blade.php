@@ -52,7 +52,7 @@
                 <ul class="dropdown-menu">
                   <li><a class="download" href="">Descarga de Archivos</a></li>
                   <li><a class="usuarios" href="">Usuarios</a></li>
-                  <li><a class="index_semestre" href="{{ route('semestre.index') }}">Nuevo Semestre</a></li>
+                  <li><a class="index_semestre" href="">Nuevo Semestre</a></li>
                   <li><a class="accesos" href="/enConstruccion">Accesos</a></li>
                   <li><a class="grupos" href="/enConstruccion">Grupos</a></li>
                   <li><a class="cursos" href="/enConstruccion">Cursos</a></li>

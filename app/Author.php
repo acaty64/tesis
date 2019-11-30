@@ -12,9 +12,10 @@ class Author extends Model
         'thesis_id', 'user_id'
     ];
 
-    public function user()
+    public function getNameAttribute()
     {
-		return $this->belongsTo(User::class, 'id');
+        $user = User::findOrFail($this->user_id);
+        return $user->name;
     }
     public function thesis()
     {

@@ -4,6 +4,7 @@ namespace App;
 
 use App\Acceso;
 use App\Tuser_user;
+use App\UserDetail;
 use App\UserGrupo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,6 +13,9 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
+
+    // protected $connection = 'login';
+
     protected $appends = ['tuser', 'tuser_user'];
 
     public function getTuserAttribute()
@@ -23,6 +27,12 @@ class User extends Authenticatable
     public function getTuserUserAttribute()
     {
         $val = $this->belongsTo(Tuser_user::class, 'id', 'user_id')->first();
+        return $val;
+    }
+
+    public function getUserDetailAttribute()
+    {
+        $val = $this->belongsTo(UserDetail::class, 'id', 'user_id')->first();
         return $val;
     }
 

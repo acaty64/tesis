@@ -17,17 +17,17 @@
 			<th>Código</th>
 			<th>Nombre</th>
 			<th>Email</th>
-			<th>Acceso</th>
+			<th>Tipo</th>
 			<th>Acción</th>
 		</tr>
 			
 		@foreach($users as $user)
 			<tr class="row" style="border-style: solid;">
 				<td>{{ $user->id }}</td>
-				<td>{{ $user->cod_doc }}</td>
+				<td>{{ $user->userDetail->codigo }}</td>
 				<td>{{ $user->name }}</td>
 				<td>{{ $user->email }}</td>
-				<td>{{ $user->acceso['wacceso'] }}</td>
+				<td>{{ $user->tuser }}</td>
 				<td>
 					<a href="{{ route('users.destroy', $user->id) }}" class="btn btn-danger" data-toggle="tooltip" title="Eliminar" ><span class="glyphicon glyphicon-remove" aria-hidden='true'></span></a>
 					<a href="{{ route('users.edit', $user->id) }}" class="btn btn-success" data-toggle="tooltip" title="Editar Datos" ><span class="glyphicon glyphicon-pencil" aria-hidden='true'></span></a>

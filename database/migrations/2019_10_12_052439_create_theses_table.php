@@ -15,7 +15,7 @@ class CreateThesesTable extends Migration
     {
         Schema::create('theses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('serie', 15);
+            $table->decimal('serie', 15, 0);
             $table->string('application', 15);
             $table->timestamps();
         });

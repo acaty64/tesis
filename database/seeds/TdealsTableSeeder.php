@@ -14,12 +14,12 @@ class TdealsTableSeeder extends Seeder
     {
 		Tdeal::create([
 			'name' => 'Ingreso de Información',
-            'blade' => true,
+            'view' => true,
             'email' => true,
 		]);
         Tdeal::create([
             'name' => 'Pregunta',
-            'blade' => true,
+            'view' => true,
         ]);
 		Tdeal::create([
 			'name' => 'Carga de Archivo',

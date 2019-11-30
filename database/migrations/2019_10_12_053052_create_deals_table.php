@@ -17,9 +17,11 @@ class CreateDealsTable extends Migration
             $table->increments('id');
             $table->integer('tdeal_id');
             $table->integer('tuser_id');
+            $table->integer('tadvisor_id')->nullable();
             $table->string('name', 45);
-            $table->string('blade', 60)->nullable();
-            $table->integer('email_id')->nullable();
+            $table->string('view', 60)->nullable();
+            $table->string('fdata', 60)->nullable();
+            $table->integer('temail_id')->nullable();
             $table->timestamps();
         });
     }
