@@ -16,6 +16,7 @@
     </div>
 @endsection
 
+@section('view','welcome.blade.php')
 @section('style')
     <style>
         html, body {

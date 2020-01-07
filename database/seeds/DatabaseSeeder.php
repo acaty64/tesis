@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DealsTableSeeder::class);
         $this->call(SequencesTableSeeder::class);
         $this->call(TitlesTableSeeder::class);
+        $this->call(TracesTableSeeder::class);
     }
 }

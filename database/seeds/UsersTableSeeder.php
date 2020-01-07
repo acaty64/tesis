@@ -28,10 +28,20 @@ class UsersTableSeeder extends Seeder
     		'password' => bcrypt('secret')
     	]);
     	User::create([
-    		'name' => 'Asesor',
-    		'email' => 'asesor@example.net',
+    		'name' => 'Asesor1',
+    		'email' => 'asesor1@example.net',
     		'password' => bcrypt('secret')
     	]);
-		factory(User::class, 14)->create();
+        User::create([
+            'name' => 'Asesor2',
+            'email' => 'asesor2@example.net',
+            'password' => bcrypt('secret')
+        ]);
+        User::create([
+            'name' => 'Comite',
+            'email' => 'comite@example.net',
+            'password' => bcrypt('secret')
+        ]);
+		factory(User::class, 10)->create();
     }
 }

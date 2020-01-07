@@ -4,8 +4,10 @@
 @section('content')
 <br>
 <div class="container">
-	<form action="{{ route('thesis.upload') }}" method="POST">
+	<form action="{{ route('thesis.update') }}" method="POST">
 		{{ csrf_field() }}
+		<input type="hidden" id="thesis_id" name="thesis_id" value={{ $data['thesis']->id }}>
+		<input type="hidden" id="oldAuthor_id" name="oldAuthor_id" value={{ $data['thesis']['authorId'] }}>
 		<span class="row">				
 			<span class="col-md-3">			
 				<div class="input-group">
@@ -26,7 +28,7 @@
 			<span class="col-md-8">			
 				<div class="input-group">
 					<span class="input-group-addon" id="author">Autor</span>
-						<select class="custom-select" name="author" id="author" required>
+						<select class="custom-select" name="author_id" id="author_id" required>
 							@foreach($data['authors'] as $item)
 								<option value="{{ $item['id'] }}" {{ ( $item['id'] == $data['authorId'] ? "selected":"") }}>{{ $item['name'] }}</option>
 							@endforeach

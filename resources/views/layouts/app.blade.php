@@ -30,7 +30,6 @@
           <!-- Branding Image -->
           <a href="http://www.ucss.edu.pe" target="_blank">
             <img class="navbar-brand" src="{{asset('images/logo-ucss.png')}}" ></img></a>
-            <p>{{ env('SEMESTRE') }}</p>
           </div>
 
           <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -38,31 +37,47 @@
             <ul class="nav navbar-nav navbar-left">
               @guest
               @else
-              @if(Auth::user()->tuser == 'Master')
-              {{-- || Auth::user()->acceso->cod_acceso == 'adm') --}}
-              <li class="dropdown comunicacion">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>Comunicación</a>
-                <ul class="dropdown-menu">
-                  <li><a class="comunicados" href="">Comunicados</a></li>
-                  <li><a class="preview" href="">Vista Previa</a></li>
-                </ul>
-              </li>
-              <li class="dropdown mantenimiento">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>Mantenimiento</a>
-                <ul class="dropdown-menu">
-                  <li><a class="download" href="">Descarga de Archivos</a></li>
-                  <li><a class="usuarios" href="">Usuarios</a></li>
-                  <li><a class="index_semestre" href="">Nuevo Semestre</a></li>
-                  <li><a class="accesos" href="/enConstruccion">Accesos</a></li>
-                  <li><a class="grupos" href="/enConstruccion">Grupos</a></li>
-                  <li><a class="cursos" href="/enConstruccion">Cursos</a></li>
-                </ul>
-              </li>
-              @endif
-              @if(Auth::user()->tuser == 'Master')
-              <li><a class="backup" href="">Backup & Restore</a></li>
-              @endif
-              <li><a href="{{ URL::previous() }}">Anterior</a></li>
+                @if(Auth::user()->tuser == 'Autor' 
+                    || Auth::user()->tuser == 'Asesor')
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>Acceso</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="" href="{{ route('sequence.apply') }}">Tesis</a></li>
+                    </ul>
+                  </li>
+                @endif
+                @if(Auth::user()->tuser == 'Administrador')
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>Registro</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="" href="{{ route('thesis.index') }}">Tesis</a></li>
+                      <li><a class="" href="{{ route('users.index') }}">Usuarios</a></li>
+                    </ul>
+                  </li>
+
+                  @if(Auth::user()->tuser == 'Master')
+                    <li class="dropdown comunicacion">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>Comunicación</a>
+                      <ul class="dropdown-menu">
+                        <li><a class="" href="">Comunicados</a></li>
+                        <li><a class="" href="">Vista Previa</a></li>
+                      </ul>
+                    </li>
+                    <li class="dropdown mantenimiento">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>Mantenimiento</a>
+                      <ul class="dropdown-menu">
+                        <li><a class="download" href="">Descarga de Archivos</a></li>
+                        <li><a class="usuarios" href="">Usuarios</a></li>
+                        <li><a class="index_semestre" href="">Nuevo Semestre</a></li>
+                        <li><a class="accesos" href="/enConstruccion">Accesos</a></li>
+                        <li><a class="grupos" href="/enConstruccion">Grupos</a></li>
+                        <li><a class="cursos" href="/enConstruccion">Cursos</a></li>
+                      </ul>
+                    </li>
+                    <li><a class="backup" href="">Backup & Restore</a></li>
+                  @endif
+                @endif
+                <li><a href="{{ URL::previous() }}">Anterior</a></li>
               @endguest
             </ul>
 

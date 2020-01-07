@@ -3,6 +3,7 @@
 
 @section('content')
 <div class="container">
+	<h3>{{ $data['deal']['name'] }}</h3>
 	<form action="{{ route('thesis.store') }}" method="POST">
 		{{ csrf_field() }}
 		<span class="row">				
@@ -17,14 +18,12 @@
 			<span class="col-md-6">			
 				<div class="input-group">
 					<span class="input-group-addon" id="author">Autor</span>
-					{{-- <span class="input-group-addon" id="author"> --}}
-						<select class="custom-select" name="author_id" id="author_id" required>
-							<option selected value="0">Seleccione...</option>
-							@foreach($data['authors'] as $item)
-								<option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
-							@endforeach
-						</select>
-					{{-- </span> --}}
+					<select class="custom-select" name="author_id" id="author_id" required>
+						<option selected value="0">Seleccione...</option>
+						@foreach($data['authors'] as $item)
+							<option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+						@endforeach
+					</select>
 				</div>
 			</span>
 		</span>
@@ -41,20 +40,12 @@
 		</div>
 	</form>
 </div>
-
-
-{{-- {{ [
-			'name' => 'Ingreso de Datos para acceso al módulo',
-            'tdeal_id' => 1,
-            'tuser_id' => 2,
-            'blade' => 'app.document.author',
-            'email_id' => 1,
-		] }} --}}
-
 @endsection
 
 @section('js')
 
 @endsection
 
-@section('view','app/document/author.blade.php')
+@section('view')
+	{{ $data['deal']['view'] }}
+@endsection

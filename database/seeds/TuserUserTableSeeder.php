@@ -37,7 +37,19 @@ class TuserUserTableSeeder extends Seeder
             'user_id' => 4,
             'tuser_id' => $id_,
         ]);
-    	for ($i=5; $i < 19; $i++) { 
+        $tuser_id = Tuser::where('name', 'Asesor')->first();
+        $id_ = $tuser_id->id;
+        Tuser_user::create([
+            'user_id' => 5,
+            'tuser_id' => $id_,
+        ]);
+        $tuser_id = Tuser::where('name', 'Asesor')->first();
+        $id_ = $tuser_id->id;
+        Tuser_user::create([
+            'user_id' => 6,
+            'tuser_id' => $id_,
+        ]);
+    	for ($i=7; $i < 16; $i++) { 
 	        Tuser_user::create([
 	        	'user_id' => $i,
 	        	'tuser_id' => rand(3,4),

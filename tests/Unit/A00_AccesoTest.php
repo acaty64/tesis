@@ -18,8 +18,6 @@ class A00_AccesoTest extends TestCase
 {
 	use DatabaseMigrations;
 
-
-
 	// public function setUp(): void
 	// {
 	// 	parent::setUp();
@@ -32,8 +30,10 @@ class A00_AccesoTest extends TestCase
      */
     public function it_does_not_allow_guests_to_discover_auths_urls()
     {
-		$this->get('invalid-url')
-			->assertStatus(404);
+		$response = $this->get('invalid-url')			
+            ->assertStatus(302);
+            // ->assertViewIs('auth.login');
+            // ->assertViewIs('error.404');
 //			->assertRedirect('login');
     }
 
@@ -65,7 +65,7 @@ class A00_AccesoTest extends TestCase
         $user = User::findOrFail($user_id);
         $this->actingAs($user);
 // dd($user->tuser_user, $user->tuser, $type_id, $user_id);
-        $response = $this->get(route('sys.tests'));
+        $response = $this->get('sys/tests');
         $response->assertStatus(200);
         $response->assertViewIs('tests');
     }

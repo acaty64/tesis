@@ -11,46 +11,33 @@ Route::get('prueba', [
 	'uses'	=> 'Sys\ArchivoController@index'
 ]);
 
+Route::get('sequence/apply/{id?}', [
+	'as'	=> 'sequence.apply',
+	'uses'	=> 'SequenceController@apply'
+]);
+
+// Route::get('sequence/show/{id}/{thesis_id?}', function ()
+// {
+// 	return ('route');
+// })->name('sequence.show');
+
 Route::get('sequence/show/{id}/{thesis_id?}', [
 	'as'	=> 'sequence.show',
 	'uses'	=> 'SequenceController@show'
 ]);
 
-// THESIS
-Route::get('thesis/email/{deal_id}', [
-	'as'	=> 'thesis.email',
-	'uses'	=> 'ThesisController@email'
+Route::get('sequence/show2/{user_id}/{thesis_id}', [
+	'as'	=> 'sequence.show2',
+	'uses'	=> 'SequenceController@show2'
 ]);
 
-Route::get('thesis/index', [
-	'as'	=> 'thesis.index',
-	'uses'	=> 'ThesisController@index'
+
+/* DOCUMENTS */
+Route::post('document/up10', [
+	'as'	=> 'document.up10',
+	'uses'	=> 'DocumentController@up10'
 ]);
 
-Route::get('thesis/create', [
-	'as'	=> 'thesis.create',
-	'uses'	=> 'ThesisController@create'
-]);
-
-Route::post('thesis/store', [
-	'as'	=> 'thesis.store',
-	'uses'	=> 'ThesisController@store'
-]);
-
-Route::get('thesis/edit/{id}', [
-	'as'	=> 'thesis.edit',
-	'uses'	=> 'ThesisController@edit'
-]);
-
-Route::post('thesis/upload', [
-	'as'	=> 'thesis.upload',
-	'uses'	=> 'ThesisController@upload'
-]);
-
-Route::get('thesis/destroy/{id}', [
-	'as'	=> 'thesis.destroy',
-	'uses'	=> 'ThesisController@destroy'
-]);
 
 /* USERS */
 Route::get('users/index', [
@@ -63,7 +50,6 @@ Route::get('login', [
 	'as'	=> 'login',
 	'uses'	=> 'Auth\LoginController@showLoginForm'
 ]);
-
 Route::post('login', [
 	'as'	=> '',
 	'uses'	=> 'Auth\LoginController@login'
@@ -76,22 +62,22 @@ Route::post('logout', [
 	'as'	=> 'logout',
 	'uses'	=> 'Auth\LoginController@logout'
 ]);
-Route::post('password/email', [
-	'as'	=> 'password.email',
-	'uses'	=> 'Auth\ForgotPasswordController@sendResetLinkEmail'
-]);
-Route::get('password/reset', [
-	'as'	=> 'password.request',
-	'uses'	=> 'Auth\ForgotPasswordController@showLinkRequestForm'
-]);
-Route::post('password/reset', [
-	'as'	=> '',
-	'uses'	=> 'Auth\ResetPasswordController@reset'
-]);
-Route::get('password/reset/{token}', [
-	'as'	=> 'password.reset',
-	'uses'	=> 'Auth\ResetPasswordController@showResetForm'
-]);
+// Route::post('password/email', [
+// 	'as'	=> 'password.email',
+// 	'uses'	=> 'Auth\ForgotPasswordController@sendResetLinkEmail'
+// ]);
+// Route::get('password/reset', [
+// 	'as'	=> 'password.request',
+// 	'uses'	=> 'Auth\ForgotPasswordController@showLinkRequestForm'
+// ]);
+// Route::post('password/reset', [
+// 	'as'	=> '',
+// 	'uses'	=> 'Auth\ResetPasswordController@reset'
+// ]);
+// Route::get('password/reset/{token}', [
+// 	'as'	=> 'password.reset',
+// 	'uses'	=> 'Auth\ResetPasswordController@showResetForm'
+// ]);
 /*  Fin rutas auth()               */
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -105,4 +91,11 @@ Route::get('/', function () {
 Route::get('enConstruccion', function()
 {
 	return view('enConstruccion');
+});
+
+
+
+Route::fallback(function()
+{
+	return response('Página no encontrada', 404);
 });

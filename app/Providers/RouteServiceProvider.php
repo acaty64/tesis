@@ -79,10 +79,9 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapSysRoutes()
     {
 //             ->middleware(['web', 'admin', 'master'])
-        Route::prefix('sys')
-             ->middleware([
+        Route::middleware([
                 'web', 
-                'master', 
+                'is_master', 
             ])
              ->namespace($this->namespace)
              ->group(base_path('routes/sys.php'));
@@ -90,26 +89,23 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapManagerRoutes()
     {
-        Route::prefix('admin')
-             ->middleware([
+        Route::middleware([
                 'web', 
-                'admin'])
+                'is_admin'])
              ->namespace($this->namespace)
              ->group(base_path('routes/admin.php'));
     }
 
     protected function mapAuthorRoutes()
     {
-        Route::prefix('autor')
-             ->middleware(['web', 'autor'])
+        Route::middleware(['web', 'is_autor'])
              ->namespace($this->namespace)
              ->group(base_path('routes/autor.php'));
     }
 
     protected function mapAdvisorRoutes()
     {
-        Route::prefix('asesor')
-             ->middleware(['web', 'asesor'])
+        Route::middleware(['web', 'is_asesor'])
              ->namespace($this->namespace)
              ->group(base_path('routes/asesor.php'));
     }

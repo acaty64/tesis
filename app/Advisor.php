@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Advisor_type;
+use App\Tadvisor;
 use App\Thesis;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -10,8 +10,10 @@ use Illuminate\Database\Eloquent\Model;
 class Advisor extends Model
 {
     protected $fillable = [
-        'thesis_id', 'user_id', 'advisor_type_id',
+        'thesis_id', 'user_id', 'tadvisor_id',
     ];
+    
+    protected $appends = ['tadvisor_name'];
 
     public function user()
     {
@@ -21,9 +23,11 @@ class Advisor extends Model
     {
 		return $this->belongsTo(Thesis::class, 'id');
     }
-    public function advisor_type()
+    public function getTadvisorNameAttribute()
     {
-		return $this->belongsTo(Advisor_type::class, 'id');
+        $t = Tadvisor::findOrFail($this->tadvisor_id);
+        return $t->name;
+		// return $this->belongsTo(Tadvisor::class, 'advisor_type_id');
     }
 
 

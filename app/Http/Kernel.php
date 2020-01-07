@@ -43,19 +43,26 @@ class Kernel extends HttpKernel
         ],
 
         'sys' => [
-            'master',
+            'web',
+            'is_autor',
+            'is_admin',
+            'is_master',
         ],
 
         'manager' => [
-            'admin'
+            'web',
+            'is_autor',
+            'is_admin',
         ],
 
         'author' => [
-            'autor'
+            'web',
+            'is_autor',
         ],
 
         'advisor' => [
-            'asesor'
+            'web',
+            'is_asesor',
         ],
 
     ];
@@ -74,9 +81,9 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'master' => \App\Http\Middleware\MasterMiddleware::class,
-        'admin' => \App\Http\Middleware\AdminMiddleware::class,
-        'autor' => \App\Http\Middleware\AutorMiddleware::class,
-        'asesor' => \App\Http\Middleware\AsesorMiddleware::class,
+        'is_master' => \App\Http\Middleware\MasterMiddleware::class,
+        'is_admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'is_autor' => \App\Http\Middleware\AutorMiddleware::class,
+        'is_asesor' => \App\Http\Middleware\AsesorMiddleware::class,
     ];
 }

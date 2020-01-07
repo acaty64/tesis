@@ -16,7 +16,7 @@ class CreateTdealsTable extends Migration
         Schema::create('tdeals', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 35);
-            $table->boolean('blade')->default(false);
+            $table->boolean('view')->default(false);
             $table->boolean('email')->default(false);
             $table->boolean('upload')->default(false);
             $table->boolean('download')->default(false);

@@ -12,7 +12,13 @@
 		<div>Vue js v2.5</div>
 		<div>Npm v5.6.0</div>
 	</span>	
-
+	@guest
+	@else
+	<span  class="nav navbar-nav list-group-item list-inline" style="color:blue; font-size:75%">
+		<div>User Id: "{{ \Auth::user()->id }}"</div>
+		<div>Tipo: "{{ \Auth::user()->tuser }}"</div>
+	</span>	
+	@endguest
 </div>
 <div class="row">
     <div class="nav navbar-nav list-group-item list-inline" id="userType" style="color:red; font-size:75%">

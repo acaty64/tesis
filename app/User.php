@@ -16,7 +16,53 @@ class User extends Authenticatable
 
     // protected $connection = 'login';
 
-    protected $appends = ['tuser', 'tuser_user'];
+    protected $appends = ['tuser', 'tuser_user', 'isMaster', 'isAdmin', 'isAdvisor', 'isDoc'];
+
+    public function getIsMasterAttribute()
+    {
+        $tuser = $this->tuser;
+        if($tuser == 'Master'){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function getIsAdminAttribute()
+    {
+        $tuser = $this->tuser;
+        if($tuser == 'Administrador'){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function getIsAdvisorAttribute()
+    {
+        $tuser = $this->tuser;
+        if($tuser == 'Asesor'){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function getIsAuthorAttribute()
+    {
+        $tuser = $this->tuser;
+        if($tuser == 'Autor'){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function getTuserIdAttribute()
+    {
+        $val = $this->belongsTo(Tuser_user::class, 'id', 'user_id')->first();
+        return $val->tuser->id;
+    }
 
     public function getTuserAttribute()
     {
@@ -35,27 +81,6 @@ class User extends Authenticatable
         $val = $this->belongsTo(UserDetail::class, 'id', 'user_id')->first();
         return $val;
     }
-
-
-    // protected function getAccesoAttribute()
-    // {
-    //     //$val = UserAcceso::where('user_id', $this->id)->first();
-    //     $val = $this->belongsTo(UserAcceso::class, 'id', 'user_id')->first();
-    //     return $val->acceso;
-    // }
-
-    // protected function getUserAccesoAttribute()
-    // {
-    //     //$val = UserAcceso::where('user_id', $this->id)->first();
-    //     $val = $this->belongsTo(UserAcceso::class, 'id', 'user_id')->first();
-    //     return $val;
-    // }
-
-    // protected function getGrupoAttribute()
-    // {
-    //     $val = $this->belongsTo(UserGrupo::class, 'id', 'user_id')->first();
-    //     return $val->grupo;
-    // }
 
     /**
      * The attributes that are mass assignable.

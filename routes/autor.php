@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-Route::get('tests', [
+Route::get('autor/tests', [
 	'as'	=> 'autor.tests',
 	'uses'	=> 'TestsController@autor'
 ]);

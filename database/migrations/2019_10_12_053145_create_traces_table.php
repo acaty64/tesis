@@ -18,8 +18,8 @@ class CreateTracesTable extends Migration
             $table->integer('thesis_id');
             $table->integer('sequence_id');
             $table->dateTime('date');
-            $table->string('document', 45)->nullable();
-            $table->string('file', 250)->nullable();
+            $table->string('document', 250)->nullable();
+            $table->string('filename', 250)->nullable();
             $table->timestamps();
         });
     }
