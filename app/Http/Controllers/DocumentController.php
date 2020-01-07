@@ -10,6 +10,7 @@ use Laracasts\Flash\Flash;
 
 class DocumentController extends Controller
 {
+
     /**
      * route('document.up10')
      */
@@ -31,16 +32,21 @@ class DocumentController extends Controller
             $newDir = $root . '/' . $thesis_id;
             $newFile = $newDir . '/' . $document;
             copy($path, $newFile);
-            $trace = Trace::create([
-                'thesis_id' => $thesis_id,
-                'sequence_id' => $sequence_id,
-                'date' => Carbon::today()->toDateTimeString(),
-                'document' => $document,
-                'filename' => $thesis_id.'/'.$filename
-            ]);
-            Flash::success('Documento ' . $document . ' grabado.');
-            Flash::error("WORKING (email)...");
-            return view('home');
+            if(file_exists($newFile)){
+                $trace = Trace::create([
+                    'thesis_id' => $thesis_id,
+                    'sequence_id' => $sequence_id,
+                    'date' => Carbon::today()->toDateTimeString(),
+                    'document' => $document,
+                    'filename' => $thesis_id.'/'.$filename
+                ]);
+                Flash::success('Documento ' . $document . ' grabado.');
+                Flash::error("WORKING (email)...");
+                return view('home');
+            }else{
+                Flash::error('Documento no grabado.'  . $document);
+                return ['success' => false];
+            }
         } catch (Exception $e) {
             Flash::error('Documento no grabado.'  . $document);
             return ['success' => false];
